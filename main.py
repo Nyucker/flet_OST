@@ -77,16 +77,23 @@ def main(page: ft.Page):
         page.update()
 
     def set_cancellation_method(e):
-        result_field_set_cancellation.content.value = 'Идет процесс...'
+        result_field_set_cancellation.content.controls[0].value = 'Идет процесс...'
         page.update()
         url = 'http://gateway.amanat.systems/api/ost/set-cancellation-contract'
-        headers = {'Authorization': 'Bearer ' + get_auth_token(int(partner_field.value))}
+
+        if selected_partner.current is None:
+            result_field_set_cancellation.content.controls[0].value = 'Чорт. Выбери партнера'
+            page.update()
+            raise Exception("Парнтер не выбран")
+
+        headers = {'Authorization': 'Bearer ' + get_auth_token(selected_partner.current)}
+
         policy_number = input_field_set_cancellation.value
         resp = requests.post(url, headers=headers, params={'policy_number': policy_number})
 
-        result_field_set_cancellation.content.controls[
-            0].value = f'{resp.json().get('success')}\n{resp.json().get('message')}'
+        result_field_set_cancellation.content.controls[0].value = f'{resp.json().get('success')}\n{resp.json().get('message')}'
         page.update()
+
 
 
     theme = ft.IconButton(icon=ft.Icons.SUNNY, on_click=change_theme)

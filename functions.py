@@ -27,10 +27,12 @@ partners = {
 
 def get_auth_token(partner, url=url):
     url += '/api/login'
+
     auth_data = {
         'login': partners[partner]['username'],
         'password': partners[partner]['password']
     }
+
 
     resp = requests.post(url, data=auth_data)
     return resp.json()['data']['access_token']
@@ -52,19 +54,8 @@ def set_policy(partner, url=url):
 
     body["from"] = "Support"
 
-
     url += '/api/ost/set-policy'
     headers = {'Authorization': 'Bearer ' + get_auth_token(partner)}
 
     resp = requests.post(url, headers=headers, json=body)
     return f"-------------------------------------------РЕЗУЛЬТАТ-------------------------------------------\n{resp.json()['success']}\n{resp.json()['message']}\n{resp.json()['errors']}\n-----------------------------------------------------------------------------------------------"
-
-
-
-
-
-
-
-
-
-
