@@ -115,7 +115,6 @@ def main(page: ft.Page):
         ft.ElevatedButton(text='JoinUp', width=150, height=50, bgcolor='white', on_click=set_selected_partner,
                           data=[3, 'JoinUp'], color='black'),
     ],
-
     )
 
     result_field_set_policy = ft.Container(
