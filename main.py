@@ -55,12 +55,13 @@ def main(page: ft.Page):
         resp = requests.post(url, headers=headers, json=body)
 
         if resp.status_code == 200:
-            result = {
-                'message': resp.json()['message'],
-                'policy_number': resp.json()['data'][0]['policy_number_ost'],
-                'file': resp.json()['data'][0]['file']
-            }
-            result_field_set_policy.content.value = result
+            result_field_set_policy.content.value = f'''
+                {resp.json()['message']}
+                
+                {resp.json()['data'][0]['policy_number_ost']}
+                
+                {resp.json()['data'][0]['file']}
+            '''
             page.update()
         else:
             result_field_set_policy.content.value = resp.json()
