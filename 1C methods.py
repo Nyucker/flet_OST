@@ -1,13 +1,14 @@
 import requests
 import json
+import os
 
 
 auth = {
-    'username': 'admin_json',
-    'password': 'GRb%@vd23sb2'
+    'username': os.getenv('LOGIN_1C'),
+    'password': os.getenv('PASSWORD_1C')
 }
 
-url = 'https://88.204.147.90/AmanatCentral/hs/AmanatHTTP/GetAgentList'
+url = os.getenv('GET_AGENT_LIST')
 
 resp = requests.get(url, auth=(auth['username'], auth['password']), verify=False)
 

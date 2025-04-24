@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 url = 'http://gateway.amanat.systems'
 
@@ -11,16 +12,16 @@ url = 'http://gateway.amanat.systems'
 
 partners = {
     1: {
-        'username': 'info@fstravel.kz',
-        'password': '8mj1NoBGWt'
+        'username': os.getenv('LOGIN_FS'),
+        'password': os.getenv('PASSWORD_FS'),
     },
     2: {
-        'username': 'hr@kompastour.kz',
-        'password': 'Uk@bEM'
+        'username': os.getenv('LOGIN_KOMPAS'),
+        'password': os.getenv('PASSWORD_KOMPAS'),
     },
     3: {
-        'username': 'a.yakupova@joinup.kz',
-        'password': 'PwaY$E'
+        'username': os.getenv('LOGIN_JOINUP'),
+        'password': os.getenv('PASSWORD_JOINUP'),
     }
 }
 
@@ -59,3 +60,5 @@ def set_policy(partner, url=url):
 
     resp = requests.post(url, headers=headers, json=body)
     return f"-------------------------------------------РЕЗУЛЬТАТ-------------------------------------------\n{resp.json()['success']}\n{resp.json()['message']}\n{resp.json()['errors']}\n-----------------------------------------------------------------------------------------------"
+
+# print(get_auth_token(2))

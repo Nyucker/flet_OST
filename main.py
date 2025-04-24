@@ -83,7 +83,7 @@ def main(page: ft.Page):
         url = 'http://gateway.amanat.systems/api/ost/set-cancellation-contract'
 
         if selected_partner.current is None:
-            result_field_set_cancellation.content.controls[0].value = 'Чорт. Выбери партнера'
+            result_field_set_cancellation.content.controls[0].value = 'Выбери партнера'
             page.update()
             raise Exception("Парнтер не выбран")
 
