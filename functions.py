@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-url = 'http://gateway.amanat.systems'
+url = os.getenv('URL')
 
 '''
 1 - FunSun
@@ -27,7 +27,7 @@ partners = {
 
 
 def get_auth_token(partner, url=url):
-    url += '/api/login'
+    url += os.getenv('U_LOGIN')
 
     auth_data = {
         'login': partners[partner]['username'],

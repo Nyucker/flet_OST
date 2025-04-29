@@ -1,3 +1,5 @@
+import os
+
 import flet as ft
 import json
 from functions import *
@@ -37,7 +39,7 @@ def main(page: ft.Page):
     def set_policy_method(e):
         result_field_set_policy.content.value = 'Идет процесс...'
         page.update()
-        url = 'http://gateway.amanat.systems/api/ost/set-policy'
+        url = os.getenv('URL_SET_POLICY')
         body = input_field_set_policy.content.value
         if len(input_field_set_policy.content.value) == 0:
             result_field_set_policy.content.value = 'Поле пустое'
@@ -80,7 +82,7 @@ def main(page: ft.Page):
     def set_cancellation_method(e):
         result_field_set_cancellation.content.controls[0].value = 'Идет процесс...'
         page.update()
-        url = 'http://gateway.amanat.systems/api/ost/set-cancellation-contract'
+        url = os.getenv('URL_SET_CANCELLATION')
 
         if selected_partner.current is None:
             result_field_set_cancellation.content.controls[0].value = 'Выбери партнера'
